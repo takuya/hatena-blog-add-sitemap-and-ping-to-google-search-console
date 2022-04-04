@@ -1,0 +1,20 @@
+name: update hatenablog sitemap
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '5 5 1 * *'
+
+jobs:
+  update_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name : post to google search console
+        shell: bash
+        run : |
+          php update-sitemap.php
+      
