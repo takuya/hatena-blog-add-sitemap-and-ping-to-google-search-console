@@ -30,10 +30,13 @@ class HatenaBlogSiteMap {
   public function checkSiteMapPeriodical():bool {
     $list = $this->siteMapPeriodical();
     foreach ( $list as $e ){
+      echo "check {$e} is valid ...";
       $xml = file_get_contents($e);
       if ($this->validateXml($xml)!==true){
         throw new RuntimeException("Xml syntax error'$e'");
       }
+      echo "OK".PHP_EOL;
+      
     }
     return true;
   }
