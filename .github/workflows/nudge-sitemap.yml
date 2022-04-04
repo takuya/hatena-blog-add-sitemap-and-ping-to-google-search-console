@@ -1,0 +1,20 @@
+name: notify to google
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '12 12 * * *'
+
+jobs:
+  check-sitemap-and-web-ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name : post to google search console
+        shell: bash
+        run : |
+          php -v 
+          php web-ping.php
