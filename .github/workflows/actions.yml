@@ -16,5 +16,5 @@ jobs:
       - name : post to google search console
         shell: bash
         run : |
-          php update-sitemap.php
+          MY_ENCRYPT_KEY=${MY_ENCRYPT_KEY} php update-sitemap.php
       
