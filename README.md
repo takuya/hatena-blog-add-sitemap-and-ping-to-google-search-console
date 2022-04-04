@@ -1,0 +1,1 @@
+# hatena-blog-add-sitemap-and-ping-to-google-search-console
