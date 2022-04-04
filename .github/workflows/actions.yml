@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron:  '12 0 * 0 *'
+    - cron:  '12 12 * * 1'
 
 jobs:
   update_and_push:
