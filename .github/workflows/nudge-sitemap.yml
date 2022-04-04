@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name : post to google search console
+      - name : web-ping
         shell: bash
         run : |
           php -v 
