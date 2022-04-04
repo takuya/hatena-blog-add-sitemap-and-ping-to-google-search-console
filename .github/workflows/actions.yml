@@ -8,7 +8,7 @@ on:
     - cron:  '12 12 * * 0'
 
 jobs:
-  update_and_push:
+  check-and-post-sitemap:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
