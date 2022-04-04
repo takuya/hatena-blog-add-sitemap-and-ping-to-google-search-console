@@ -51,6 +51,7 @@ class HatenaBlogSiteMap {
   public function sendWebPing(){
     $list = $this->siteMapPeriodical();
     foreach ( $list as $e ){
+      echo "send notify $e ...";
       $ping_url = "http://www.google.com/ping?sitemap=".rawurlencode($e);
       $html = file_get_contents($ping_url);
       $dom = new DOMDocument();
@@ -60,6 +61,7 @@ class HatenaBlogSiteMap {
       if ( !preg_match('|Sitemap Notification Received$|', $title)){
         throw new RuntimeException("Notification Send Failed.");
       }
+      echo "done.".PHP_EOL;
     }
   }
 }
