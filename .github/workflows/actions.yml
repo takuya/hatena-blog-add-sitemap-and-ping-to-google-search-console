@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron:  '5 5 1 * *'
+    - cron:  '12 0 * 0 *'
 
 jobs:
   update_and_push:
@@ -14,9 +14,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name : post to google search console
-
         shell: bash
         run : |
           php -v 
           MY_ENCRYPT_KEY=${{ secrets.MY_ENCRYPT_KEY }} php update-sitemap.php
-      
