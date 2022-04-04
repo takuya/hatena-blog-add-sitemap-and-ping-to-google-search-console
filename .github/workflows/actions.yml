@@ -14,7 +14,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name : post to google search console
+        with:
+          MY_ENCRYPT_KEY: ${{ secrets.MY_ENCRYPT_KEY }}
         shell: bash
         run : |
-          MY_ENCRYPT_KEY=${MY_ENCRYPT_KEY} php update-sitemap.php
+          php -v 
+          php update-sitemap.php
       
