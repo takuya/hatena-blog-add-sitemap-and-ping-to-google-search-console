@@ -18,3 +18,11 @@ jobs:
         run : |
           php -v 
           php web-ping.php
+      - name : log
+        shell: bash
+        run : |
+          date -I > last-webping.txt
+      - name: push updated lists
+        uses: stefanzweifel/git-auto-commit-action@v4.2.0
+        with:
+          commit_message: update webping
