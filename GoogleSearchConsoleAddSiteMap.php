@@ -7,7 +7,7 @@ class GoogleSearchConsoleAddSiteMap {
   protected string $refresh_token;
   protected string $token_uri='https://www.googleapis.com/oauth2/v4/token';
   protected int $token_expires;
-  protected string $token;
+  protected string $token = "";
   public function __construct($refresh_token,$client_id,$client_secret) {
     $this->client_id = $client_id;
     $this->client_secret =$client_secret;
@@ -25,15 +25,17 @@ class GoogleSearchConsoleAddSiteMap {
         "refresh_token"=>$this->refresh_token,
         "grant_type"=>"refresh_token",
       ];
-  
       $curl = curl_init($this->token_uri);
       curl_setopt($curl,CURLOPT_POST, TRUE);
       curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
       curl_setopt($curl,CURLOPT_RETURNTRANSFER, TRUE);
       $ret= curl_exec($curl);
-      $ret = json_decode($ret,true);
-      $this->token_expires=strtotime("+{$ret['expires_in']}sec");
-      $this->token = $ret['access_token'];
+      $res_json = json_decode($ret,true);
+      if ( !empty($res_json['error']) ) {
+        throw new RuntimeException($ret);
+      }
+      $this->token_expires=strtotime("+{$res_json['expires_in']}sec");
+      $this->token = $res_json['access_token'];
     }
     return $this->token;
   }
@@ -45,7 +47,11 @@ class GoogleSearchConsoleAddSiteMap {
     ]);
     curl_setopt($curl,CURLOPT_RETURNTRANSFER, TRUE);
     $ret= curl_exec($curl);
-    return json_decode($ret,true);
+    $res_json = json_decode($ret,true);
+    if ( !empty($res_json['error']) ) {
+      throw new RuntimeException($ret);
+    }
+    return $res_json;
   }
   public function addSiteMap($site_url, $sitemap_url) {
     $url = "https://www.googleapis.com/webmasters/v3/sites/".rawurlencode($site_url)."/sitemaps";
@@ -58,7 +64,11 @@ class GoogleSearchConsoleAddSiteMap {
     curl_setopt($curl,CURLOPT_RETURNTRANSFER, TRUE);
     // curl_setopt($curl,CURLOPT_VERBOSE, TRUE);
     $ret= curl_exec($curl);
-    return json_decode($ret,true);
+    $res_json = json_decode($ret,true);
+    if ( !empty($res_json['error']) ) {
+      throw new RuntimeException($ret);
+    }
+    return $res_json;
   }
   
   
