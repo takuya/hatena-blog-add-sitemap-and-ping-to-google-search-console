@@ -3,9 +3,9 @@ name: update hatenablog sitemap
 on:
   push:
     branches:
-      - #master
+      - master
   schedule:
-    - #cron:  '0 11 * * *'
+    - cron:  '0 11 * * *'
 
 jobs:
   check-and-post-sitemap:
